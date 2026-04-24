@@ -1,65 +1,210 @@
-import Image from "next/image";
+<!DOCTYPE html>
+<html lang="es">
 
-export default function Home() {
-  return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ass3mbl3r | Low-Level Digital Solutions</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;500&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Fira Code', monospace;
+        }
+
+        .glitch:hover {
+            text-shadow: 2px 0 #00ff00, -2px 0 #ff00ff;
+        }
+    </style>
+</head>
+
+<body class="bg-black text-gray-300 selection:bg-green-500 selection:text-black">
+    <div id="loader"
+        class="fixed inset-0 z-[100] bg-black flex flex-col justify-center items-center font-mono text-xs md:text-sm p-10">
+        <div id="loader-content" class="text-green-500 max-w-md w-full">
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
     </div>
-  );
-}
+    <nav class="p-6 border-b border-gray-800 flex justify-between items-center">
+        <div class="text-green-500 font-bold text-xl glitch tracking-tighter cursor-default">
+            [ass3mbl3r]
+        </div>
+        <div class="space-x-6 text-sm">
+            <a href="#about" class="hover:text-green-400 transition">.sobre_mí</a>
+            <a href="#stack" class="hover:text-green-400 transition">.stack</a> <a href="#projects"
+                class="hover:text-green-400 transition">.proyectos</a>
+            <a href="#contact" class="hover:text-green-400 transition">.contacto</a>
+        </div>
+    </nav>
+
+    <header class="h-[70vh] flex flex-col justify-center px-10 max-w-5xl mx-auto">
+        <h1 class="text-5xl md:text-7xl font-light mb-4">
+            Construyendo el futuro bit a bit.
+        </h1>
+        <p class="text-green-600 text-lg mb-8">
+            > Soluciones digitales de bajo nivel, alta eficiencia.
+        </p>
+        <div class="flex space-x-4">
+            <a href="#projects"
+                class="border border-green-500 text-green-500 px-6 py-2 hover:bg-green-500 hover:text-black transition">
+                Ver Proyectos
+            </a>
+        </div>
+    </header>
+    <section id="about" class="py-20 px-10 max-w-5xl mx-auto border-t border-gray-900">
+        <div class="grid md:grid-cols-2 gap-12">
+            <div>
+                <h2 class="text-2xl text-green-500 mb-6 tracking-widest">// MANIFIESTO_0x01</h2>
+                <p class="text-gray-400 leading-relaxed mb-4">
+                    En un mundo saturado de software pesado, <span class="text-white">ass3mbl3r</span> nace de mi
+                    necesidad de volver a lo esencial.
+                </p>
+                <p class="text-gray-400 leading-relaxed">
+                    Creo en la arquitectura limpia y en el código que respeta el hardware. No solo programo; ensamblo
+                    soluciones donde cada bit tiene un propósito.
+                </p>
+            </div>
+            <div class="bg-zinc-900/50 p-8 border border-zinc-800 rounded-sm relative overflow-hidden">
+                <div class="absolute top-0 right-0 p-2 text-[10px] text-zinc-700 font-mono">v1.0.42</div>
+                <ul class="space-y-4 text-sm font-mono">
+                    <li class="flex items-start">
+                        <span class="text-green-500 mr-2">01_</span>
+                        <span>Eficiencia por sobre estética vacía.</span>
+                    </li>
+                    <li class="flex items-start">
+                        <span class="text-green-500 mr-2">02_</span>
+                        <span>Código artesanal, ejecución industrial.</span>
+                    </li>
+                    <li class="flex items-start">
+                        <span class="text-green-500 mr-2">03_</span>
+                        <span>Transparencia técnica absoluta.</span>
+                    </li>
+                    <li class="flex items-start">
+                        <span class="text-green-500 mr-2">04_</span>
+                        <span>YASUMI: Desarrollo en curso (Kernel v0.1).</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+    <section id="stack" class="py-20 px-10 max-w-5xl mx-auto border-t border-gray-900">
+        <h2 class="text-2xl text-green-500 mb-10 tracking-widest">// TECH_STACK_0x02</h2>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="border border-zinc-800 p-6 bg-zinc-950/30">
+                <h3 class="text-white mb-4 font-bold">.frontend</h3>
+                <ul class="text-sm text-gray-500 space-y-2 font-mono">
+                    <li>> HTML5 / CSS3 (Tailwind)</li>
+                    <li>> JavaScript (ES6+)</li>
+                    <li>> React / Next.js</li>
+                </ul>
+            </div>
+
+            <div class="border border-zinc-800 p-6 bg-zinc-950/30">
+                <h3 class="text-white mb-4 font-bold">.backend_logic</h3>
+                <ul class="text-sm text-gray-500 space-y-2 font-mono">
+                    <li>> Node.js (Runtime)</li>
+                    <li>> Java (Core Logic)</li>
+                    <li>> PostgreSQL / Supabase</li>
+                    <li>> Docker / Containers</li>
+                </ul>
+            </div>
+
+            <div class="border border-zinc-800 p-6 bg-zinc-950/30">
+                <h3 class="text-white mb-4 font-bold">.devtools</h3>
+                <ul class="text-sm text-gray-500 space-y-2 font-mono">
+                    <li>> Git / GitHub</li>
+                    <li>> Vercel Deployment</li>
+                    <li>> WSL2 / Linux Environment</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+    <section id="projects" class="py-20 bg-zinc-950 px-10 border-y border-gray-900">
+        <div class="max-w-5xl mx-auto">
+            <div class="flex items-center space-x-4 mb-6">
+                <div class="h-px bg-green-900 flex-grow"></div>
+                <h2 class="text-xl text-white font-mono">LAB_LOG: YASUMI</h2>
+            </div>
+            <p class="text-gray-400 max-w-2xl mb-6 italic">
+                Actualmente estoy refactorizando mi propio sistema ERP/POS. No es un producto comercial masivo
+                (todavía); es un experimento de eficiencia comercial llevado al extremo.
+            </p>
+            <div class="inline-flex items-center space-x-2 text-xs font-mono text-zinc-500">
+                <span class="relative flex h-2 w-2">
+                    <span
+                        class="animate-ping absolute inline-flex h-full w-full rounded-full bg-orange-400 opacity-75"></span>
+                    <span class="relative inline-flex rounded-full h-2 w-2 bg-orange-500"></span>
+                </span>
+                <span>ESTADO: REFACTORIZACIÓN DE NÚCLEO</span>
+            </div>
+        </div>
+    </section>
+
+    <footer id="contact" class="p-10 text-center text-xs text-gray-600">
+        <p>© 2026 ass3mbl3r. All rights reserved.</p>
+        <p class="mt-2 text-green-900">// Efficiency is not an option, it's the core.</p>
+    </footer>
+
+</body>
+<script>
+    const loaderContent = document.getElementById('loader-content');
+    const logs = [
+        "> INITIALIZING BOOT_SEQUENCE...",
+        "> LOADING KERNEL_MODULES...",
+        "> CONNECTING TO ass3mbl3r.com.ar...",
+        "> ACCESS GRANTED.",
+        "> STARTING INTERFACE..."
+    ];
+
+    let logIndex = 0;
+
+    // Función para mostrar los logs de carga
+    function showLogs() {
+        if (logIndex < logs.length) {
+            const p = document.createElement('p');
+            p.textContent = logs[logIndex];
+            p.className = "mb-2 opacity-0 animate-pulse";
+            loaderContent.appendChild(p);
+
+            // Animación simple de aparición
+            setTimeout(() => { p.style.opacity = "1"; }, 50);
+
+            logIndex++;
+            setTimeout(showLogs, 400); // Velocidad de cada línea
+        } else {
+            // Cuando termina, esperamos un poco y ocultamos el loader
+            setTimeout(() => {
+                const loader = document.getElementById('loader');
+                loader.style.transition = "opacity 0.8s ease";
+                loader.style.opacity = "0";
+                setTimeout(() => {
+                    loader.style.display = "none";
+                    typeWriter(); // Iniciamos el efecto de tipeo del Hero
+                }, 800);
+            }, 500);
+        }
+    }
+
+    // Código del Typewriter (tu texto del Hero)
+    const heroText = "Construyendo el futuro bit a bit.";
+    const speed = 50;
+    let charIndex = 0;
+
+    function typeWriter() {
+        const target = document.querySelector('header h1');
+        if (charIndex < heroText.length) {
+            target.innerHTML += heroText.charAt(charIndex);
+            charIndex++;
+            setTimeout(typeWriter, speed);
+        }
+    }
+
+    // Arrancamos todo cuando carga la ventana
+    window.onload = () => {
+        const target = document.querySelector('header h1');
+        target.innerHTML = ''; // Limpiamos el hero para que no se vea antes
+        showLogs();
+    };
+</script>
+
+</html>
