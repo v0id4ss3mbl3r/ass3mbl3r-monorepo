@@ -21,13 +21,15 @@ export default function LoginPage() {
     }
     setLoading(false);
   };
-
   // Login con Google
   const handleGoogleLogin = async () => {
     const { error } = await supabase.auth.signInWithOAuth({
       provider: 'google',
       options: {
+        // Forzamos que vaya al callback que creamos
         redirectTo: `${window.location.origin}/auth/callback`,
+        // Esto asegura que Supabase use el flujo de servidor (code) y no el de hash (#)
+        skipBrowserRedirect: false,
       },
     });
     if (error) console.error("Error Google Auth:", error.message);
@@ -38,25 +40,25 @@ export default function LoginPage() {
       <div className="w-full max-w-xs border border-green-900 p-8 bg-zinc-950 shadow-[0_0_20px_rgba(34,197,94,0.1)]">
         <form onSubmit={handleLogin} className="space-y-6">
           <h1 className="text-center text-xl tracking-tighter font-bold uppercase text-white">System_Auth</h1>
-          
+
           <div className="space-y-4">
-            <input 
-              type="email" 
-              placeholder="USER_EMAIL" 
+            <input
+              type="email"
+              placeholder="USER_EMAIL"
               className="w-full bg-transparent border-b border-zinc-800 p-2 focus:border-green-500 outline-none text-xs text-white"
               onChange={(e) => setEmail(e.target.value)}
               required
             />
-            <input 
-              type="password" 
-              placeholder="PASSWORD" 
+            <input
+              type="password"
+              placeholder="PASSWORD"
               className="w-full bg-transparent border-b border-zinc-800 p-2 focus:border-green-500 outline-none text-xs text-white"
               onChange={(e) => setPassword(e.target.value)}
               required
             />
           </div>
 
-          <button 
+          <button
             type="submit"
             disabled={loading}
             className="w-full bg-green-600 text-black py-2 font-bold text-xs hover:bg-green-400 transition-colors uppercase"
@@ -70,7 +72,7 @@ export default function LoginPage() {
           <div className="relative flex justify-center text-[10px] uppercase"><span className="bg-zinc-950 px-2 text-zinc-600">O usar identidad externa</span></div>
         </div>
 
-        <button 
+        <button
           onClick={handleGoogleLogin}
           className="w-full border border-zinc-800 py-2 flex items-center justify-center gap-2 hover:bg-white hover:text-black transition-all text-[10px] font-bold uppercase"
         >
