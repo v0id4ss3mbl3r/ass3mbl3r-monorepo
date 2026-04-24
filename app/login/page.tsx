@@ -21,14 +21,14 @@ export default function LoginPage() {
     }
     setLoading(false);
   };
-  // Login con Google
+
   const handleGoogleLogin = async () => {
     const { error } = await supabase.auth.signInWithOAuth({
       provider: 'google',
       options: {
-        // Forzamos que vaya al callback que creamos
+        // Forzamos el callback que creamos en el servidor
         redirectTo: `${window.location.origin}/auth/callback`,
-        // Esto asegura que Supabase use el flujo de servidor (code) y no el de hash (#)
+        // Esta opción es clave para que no use el fragmento # y use cookies
         skipBrowserRedirect: false,
       },
     });
