@@ -9,7 +9,7 @@ export async function GET(request: Request) {
   if (code) {
     // IMPORTANTE: En Next.js 15 cookies() es una promesa, hay que usar await
     const cookieStore = await cookies()
-    
+
     const supabase = createServerClient(
       process.env.NEXT_PUBLIC_SUPABASE_URL!,
       process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
@@ -27,10 +27,10 @@ export async function GET(request: Request) {
         },
       }
     )
-    
+
     const { error } = await supabase.auth.exchangeCodeForSession(code)
     if (!error) {
-      return NextResponse.redirect(`${origin}/pv-games`)
+      return NextResponse.redirect(new URL('/pv-games', request.url))
     }
   }
 

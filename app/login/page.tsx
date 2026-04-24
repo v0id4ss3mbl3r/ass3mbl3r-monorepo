@@ -1,5 +1,5 @@
 "use client";
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { supabase } from '@/lib/supabase';
 import { useRouter } from 'next/navigation';
 
@@ -8,6 +8,18 @@ export default function LoginPage() {
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const router = useRouter();
+
+  // ESCUCHADOR DE SESIÓN: Si detecta que te logueaste, te saca del login
+  useEffect(() => {
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
+      if (event === 'SIGNED_IN' && session) {
+        router.push('/pv-games');
+        router.refresh(); // Forzamos a Next.js a re-validar el Middleware
+      }
+    });
+
+    return () => subscription.unsubscribe();
+  }, [router]);
 
   // Login tradicional
   const handleLogin = async (e: React.FormEvent) => {
