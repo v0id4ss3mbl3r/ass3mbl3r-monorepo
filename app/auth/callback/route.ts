@@ -7,7 +7,9 @@ export async function GET(request: Request) {
   const code = searchParams.get('code')
 
   if (code) {
-    const cookieStore = cookies()
+    // IMPORTANTE: En Next.js 15 cookies() es una promesa, hay que usar await
+    const cookieStore = await cookies()
+    
     const supabase = createServerClient(
       process.env.NEXT_PUBLIC_SUPABASE_URL!,
       process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
@@ -17,20 +19,10 @@ export async function GET(request: Request) {
             return cookieStore.get(name)?.value
           },
           set(name: string, value: string, options: CookieOptions) {
-            // Forzamos el tipado para evitar el error de VS Code
-            try {
-              cookieStore.set({ name, value, ...options })
-            } catch (error) {
-              // En Server Components a veces el set falla si no es un Server Action, 
-              // pero en Route Handlers como este funciona.
-            }
+            cookieStore.set({ name, value, ...options })
           },
           remove(name: string, options: CookieOptions) {
-            try {
-              cookieStore.set({ name, value: '', ...options })
-            } catch (error) {
-              // Manejo silencioso
-            }
+            cookieStore.set({ name, value: '', ...options })
           },
         },
       }
@@ -42,5 +34,6 @@ export async function GET(request: Request) {
     }
   }
 
+  // En caso de error, volvemos al login
   return NextResponse.redirect(`${origin}/login`)
 }
