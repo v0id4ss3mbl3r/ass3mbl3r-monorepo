@@ -16,7 +16,15 @@ export async function middleware(request: NextRequest) {
       cookies: {
         get(name: string) { return request.cookies.get(name)?.value },
         set(name: string, value: string, options: CookieOptions) {
-          response.cookies.set({ name, value, ...options })
+          response.cookies.set({
+            name,
+            value,
+            ...options,
+            domain: '.ass3mbl3r.com.ar', // El punto adelante permite que funcione en www y sin www
+            sameSite: 'lax',
+            secure: true,
+            path: '/',
+          })
         },
         remove(name: string, options: CookieOptions) {
           response.cookies.set({ name, value: '', ...options })
