@@ -35,17 +35,17 @@ export default function LoginPage() {
   };
 
   const handleGoogleLogin = async () => {
-    const { error } = await supabase.auth.signInWithOAuth({
+    await supabase.auth.signInWithOAuth({
       provider: 'google',
       options: {
-        redirectTo: `${window.location.origin}/auth/callback`,
-        // @ts-ignore - Forzamos PKCE para evitar el fragmento # en la URL
+        // Forzamos que Google siempre vuelva a tu ruta de servidor
+        redirectTo: `https://ass3mbl3r.com.ar/auth/callback`,
+        // @ts-ignore
         flowType: 'pkce',
       },
     });
-    if (error) console.error("Error Google Auth:", error.message);
   };
-  
+
   return (
     <div className="min-h-screen bg-black text-green-500 font-mono flex items-center justify-center p-6">
       <div className="w-full max-w-xs border border-green-900 p-8 bg-zinc-950 shadow-[0_0_20px_rgba(34,197,94,0.1)]">

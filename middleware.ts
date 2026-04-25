@@ -21,18 +21,15 @@ export async function middleware(request: NextRequest) {
     }
   )
 
-  // IMPORTANTE: getUser() verifica la validez real con Supabase
   const { data: { user } } = await supabase.auth.getUser()
 
   if (request.nextUrl.pathname.startsWith('/pv-games') && !user) {
-    const url = request.nextUrl.clone()
-    url.pathname = '/login'
-    return NextResponse.redirect(url)
+    return NextResponse.redirect(new URL('/login', request.url))
   }
 
   return supabaseResponse
 }
 
 export const config = {
-  matcher: ['/pv-games/:path*'], // Solo protegemos lo necesario para evitar bucles
+  matcher: ['/pv-games/:path*'],
 }
