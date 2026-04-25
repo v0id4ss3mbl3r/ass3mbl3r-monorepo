@@ -13,11 +13,8 @@ export async function GET(request: Request) {
       process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
       {
         cookies: {
-          get(name: string) {
-            return cookieStore.get(name)?.value
-          },
+          get(name: string) { return cookieStore.get(name)?.value },
           set(name: string, value: string, options: CookieOptions) {
-            // Dejamos que Next.js maneje el dominio solo
             cookieStore.set({ name, value, ...options })
           },
           remove(name: string, options: CookieOptions) {
@@ -28,12 +25,10 @@ export async function GET(request: Request) {
     )
 
     const { error } = await supabase.auth.exchangeCodeForSession(code)
-
     if (!error) {
-      // Redirección absoluta
+      // Importante: Redirigimos al ORIGIN que detecta el servidor
       return NextResponse.redirect(`${origin}/pv-games`)
     }
   }
-
   return NextResponse.redirect(`${origin}/login`)
 }

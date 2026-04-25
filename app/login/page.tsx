@@ -38,10 +38,13 @@ export default function LoginPage() {
     const { error } = await supabase.auth.signInWithOAuth({
       provider: 'google',
       options: {
-        // Forzamos el callback que creamos en el servidor
+        // Esta URL debe coincidir EXACTAMENTE con lo que tenés en Supabase y Google
         redirectTo: `${window.location.origin}/auth/callback`,
-        // Esta opción es clave para que no use el fragmento # y use cookies
-        skipBrowserRedirect: false,
+        // Forzamos el flujo de código para que pase por el servidor
+        queryParams: {
+          access_type: 'offline',
+          prompt: 'consent',
+        },
       },
     });
     if (error) console.error("Error Google Auth:", error.message);
