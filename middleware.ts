@@ -15,7 +15,7 @@ export async function middleware(request: NextRequest) {
           return request.cookies.get(name)?.value
         },
         set(name: string, value: string, options: CookieOptions) {
-          // Actualizamos request y response para persistencia inmediata
+          // Sin 'domain' manual para evitar el bloqueo del navegador
           request.cookies.set({ name, value, ...options })
           response = NextResponse.next({
             request: { headers: request.headers },
@@ -23,6 +23,7 @@ export async function middleware(request: NextRequest) {
           response.cookies.set({ name, value, ...options })
         },
         remove(name: string, options: CookieOptions) {
+          // Fix de tipos: delete solo acepta el nombre como string
           request.cookies.delete(name)
           response = NextResponse.next({
             request: { headers: request.headers },

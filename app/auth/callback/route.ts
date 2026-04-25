@@ -17,11 +17,11 @@ export async function GET(request: Request) {
             return cookieStore.get(name)?.value
           },
           set(name: string, value: string, options: CookieOptions) {
-            // Usamos una aserción de tipo para evitar errores de TS en Next 15
-            (cookieStore as any).set({ name, value, ...options })
+            // Quitamos el dominio manual para que el navegador la acepte
+            cookieStore.set({ name, value, ...options })
           },
           remove(name: string, options: CookieOptions) {
-            (cookieStore as any).set({ name, value: '', ...options })
+            cookieStore.set({ name, value: '', ...options })
           },
         },
       }
