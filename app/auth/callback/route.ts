@@ -26,7 +26,7 @@ export async function GET(request: Request) {
 
     const { error } = await supabase.auth.exchangeCodeForSession(code)
     if (!error) {
-      // Importante: Redirigimos al ORIGIN que detecta el servidor
+      // Forzamos la redirección a la ruta privada usando el origin (con www)
       return NextResponse.redirect(`${origin}/pv-games`)
     }
   }

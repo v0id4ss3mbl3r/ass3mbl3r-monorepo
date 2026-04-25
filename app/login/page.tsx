@@ -38,9 +38,9 @@ export default function LoginPage() {
     const { error } = await supabase.auth.signInWithOAuth({
       provider: 'google',
       options: {
-        // Esta URL debe coincidir EXACTAMENTE con lo que tenés en Supabase y Google
+        // Usamos el origin del navegador para que coincida con el www
         redirectTo: `${window.location.origin}/auth/callback`,
-        // Forzamos el flujo de código para que pase por el servidor
+        // Esto fuerza a que el token no venga por el hash #
         queryParams: {
           access_type: 'offline',
           prompt: 'consent',
