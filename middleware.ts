@@ -15,7 +15,7 @@ export async function middleware(request: NextRequest) {
           return request.cookies.get(name)?.value
         },
         set(name: string, value: string, options: CookieOptions) {
-          // El request usa un set simple, la response usa el objeto de opciones
+          // Actualizamos request y response para persistencia inmediata
           request.cookies.set({ name, value, ...options })
           response = NextResponse.next({
             request: { headers: request.headers },
@@ -23,7 +23,6 @@ export async function middleware(request: NextRequest) {
           response.cookies.set({ name, value, ...options })
         },
         remove(name: string, options: CookieOptions) {
-          // FIX: request.cookies.delete solo acepta el string del nombre
           request.cookies.delete(name)
           response = NextResponse.next({
             request: { headers: request.headers },
@@ -36,7 +35,7 @@ export async function middleware(request: NextRequest) {
 
   const { data: { session } } = await supabase.auth.getSession()
 
-  // Protección de la ruta privada
+  // Protección de ruta privada
   if (request.nextUrl.pathname.startsWith('/pv-games') && !session) {
     const url = request.nextUrl.clone()
     url.pathname = '/login'

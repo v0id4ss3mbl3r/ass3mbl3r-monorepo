@@ -17,23 +17,21 @@ export async function GET(request: Request) {
             return cookieStore.get(name)?.value
           },
           set(name: string, value: string, options: CookieOptions) {
-            cookieStore.set({ name, value, ...options })
+            // Usamos una aserción de tipo para evitar errores de TS en Next 15
+            (cookieStore as any).set({ name, value, ...options })
           },
           remove(name: string, options: CookieOptions) {
-            cookieStore.set({ name, value: '', ...options })
+            (cookieStore as any).set({ name, value: '', ...options })
           },
         },
       }
     )
 
     const { error } = await supabase.auth.exchangeCodeForSession(code)
-
     if (!error) {
-      // Forzamos la redirección a la ruta privada usando el origin detectado
       return NextResponse.redirect(`${origin}/pv-games`)
     }
   }
 
-  // En caso de error o sin código, regresamos al login
   return NextResponse.redirect(`${origin}/login`)
 }
