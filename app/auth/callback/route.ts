@@ -19,7 +19,7 @@ export async function GET(request: Request) {
               cookiesToSet.forEach(({ name, value, options }) =>
                 cookieStore.set(name, value, options)
               )
-            } catch { /* Middleware maneja esto */ }
+            } catch { /* El middleware se encarga */ }
           },
         },
       }
@@ -27,6 +27,7 @@ export async function GET(request: Request) {
 
     const { error } = await supabase.auth.exchangeCodeForSession(code)
     if (!error) {
+      // Redirección fija al dominio principal
       return NextResponse.redirect(`https://ass3mbl3r.com.ar/pv-games`)
     }
   }

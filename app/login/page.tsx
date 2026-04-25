@@ -38,7 +38,7 @@ export default function LoginPage() {
     await supabase.auth.signInWithOAuth({
       provider: 'google',
       options: {
-        // Forzamos que Google siempre vuelva a tu ruta de servidor
+        // Forzamos la URL exacta que pusiste en Google Cloud
         redirectTo: `https://ass3mbl3r.com.ar/auth/callback`,
         // @ts-ignore
         flowType: 'pkce',
