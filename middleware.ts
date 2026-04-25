@@ -15,7 +15,7 @@ export async function middleware(request: NextRequest) {
           return request.cookies.get(name)?.value
         },
         set(name: string, value: string, options: CookieOptions) {
-          // No forzamos dominio, dejamos que Next.js lo maneje
+          // Eliminamos el esparcido de 'options' manual si trae dominios viejos
           request.cookies.set({ name, value, ...options })
           response = NextResponse.next({
             request: { headers: request.headers },
@@ -35,7 +35,7 @@ export async function middleware(request: NextRequest) {
 
   const { data: { session } } = await supabase.auth.getSession()
 
-  // Si intentas entrar a la zona privada sin sesión, al login
+  // Si no hay sesión y quiere entrar a pv-games, al login
   if (request.nextUrl.pathname.startsWith('/pv-games') && !session) {
     const url = request.nextUrl.clone()
     url.pathname = '/login'

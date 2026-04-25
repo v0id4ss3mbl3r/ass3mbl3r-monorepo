@@ -17,6 +17,7 @@ export async function GET(request: Request) {
             return cookieStore.get(name)?.value
           },
           set(name: string, value: string, options: CookieOptions) {
+            // Dejamos que Next.js maneje el dominio solo
             cookieStore.set({ name, value, ...options })
           },
           remove(name: string, options: CookieOptions) {
@@ -27,9 +28,9 @@ export async function GET(request: Request) {
     )
 
     const { error } = await supabase.auth.exchangeCodeForSession(code)
-    
+
     if (!error) {
-      // Redirección absoluta para evitar pérdida de contexto en Next 15
+      // Redirección absoluta
       return NextResponse.redirect(`${origin}/pv-games`)
     }
   }
