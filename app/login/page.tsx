@@ -35,19 +35,14 @@ export default function LoginPage() {
   };
 
   const handleGoogleLogin = async () => {
-    const { error } = await supabase.auth.signInWithOAuth({
+    await supabase.auth.signInWithOAuth({
       provider: 'google',
       options: {
-        // Usamos el origin del navegador para que coincida con el www
+        // Asegurate de que esto sea exactamente igual a Supabase
         redirectTo: `${window.location.origin}/auth/callback`,
-        // Esto fuerza a que el token no venga por el hash #
-        queryParams: {
-          access_type: 'offline',
-          prompt: 'consent',
-        },
+        skipBrowserRedirect: false,
       },
     });
-    if (error) console.error("Error Google Auth:", error.message);
   };
 
   return (
