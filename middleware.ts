@@ -15,7 +15,7 @@ export async function middleware(request: NextRequest) {
           return request.cookies.get(name)?.value
         },
         set(name: string, value: string, options: CookieOptions) {
-          // Sin 'domain' manual para evitar el bloqueo del navegador
+          // No forzamos dominio, dejamos que Next.js lo maneje
           request.cookies.set({ name, value, ...options })
           response = NextResponse.next({
             request: { headers: request.headers },
@@ -23,7 +23,6 @@ export async function middleware(request: NextRequest) {
           response.cookies.set({ name, value, ...options })
         },
         remove(name: string, options: CookieOptions) {
-          // Fix de tipos: delete solo acepta el nombre como string
           request.cookies.delete(name)
           response = NextResponse.next({
             request: { headers: request.headers },
@@ -36,7 +35,7 @@ export async function middleware(request: NextRequest) {
 
   const { data: { session } } = await supabase.auth.getSession()
 
-  // Protección de ruta privada
+  // Si intentas entrar a la zona privada sin sesión, al login
   if (request.nextUrl.pathname.startsWith('/pv-games') && !session) {
     const url = request.nextUrl.clone()
     url.pathname = '/login'
