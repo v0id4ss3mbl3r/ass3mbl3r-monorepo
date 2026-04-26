@@ -9,28 +9,21 @@ export default function LoginPage() {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 
-  // ESCUCHADOR DE SESIÓN: Si detecta que te logueaste, te saca del login
   useEffect(() => {
     const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
       if (event === 'SIGNED_IN' && session) {
         router.push('/pv-games');
-        router.refresh(); // Forzamos a Next.js a re-validar el Middleware
+        router.refresh();
       }
     });
-
     return () => subscription.unsubscribe();
   }, [router]);
 
-  // Login tradicional
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
     const { error } = await supabase.auth.signInWithPassword({ email, password });
-    if (error) {
-      alert("Error: " + error.message);
-    } else {
-      router.push('/pv-games');
-    }
+    if (error) alert("Error: " + error.message);
     setLoading(false);
   };
 
@@ -38,10 +31,8 @@ export default function LoginPage() {
     await supabase.auth.signInWithOAuth({
       provider: 'google',
       options: {
-        // Forzamos el subdominio www que es el que tu navegador prefiere
         redirectTo: `https://www.ass3mbl3r.com.ar/auth/callback`,
-        // @ts-ignore
-        flowType: 'pkce',
+        // flowType ya NO va acá
       },
     });
   };
