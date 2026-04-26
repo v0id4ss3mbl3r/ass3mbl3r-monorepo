@@ -27,10 +27,10 @@ export async function GET(request: Request) {
 
     const { error } = await supabase.auth.exchangeCodeForSession(code)
     if (!error) {
-      // Redirección fija al dominio principal
-      return NextResponse.redirect(`https://ass3mbl3r.com.ar/pv-games`)
+      // Redirigimos siempre con www
+      return NextResponse.redirect(`https://www.ass3mbl3r.com.ar/pv-games`)
     }
   }
 
-  return NextResponse.redirect(`https://ass3mbl3r.com.ar/login?error=auth_failed`)
+  return NextResponse.redirect(`https://www.ass3mbl3r.com.ar/login?error=auth_failed`)
 }
